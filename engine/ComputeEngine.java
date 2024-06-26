@@ -29,37 +29,39 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */ 
 
-package engine;
+ package engine;
 
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.rmi.server.UnicastRemoteObject;
-import compute.Compute;
-import compute.Task;
-
-public class ComputeEngine implements Compute {
-
-    public ComputeEngine() {
-        super();
-    }
-
-    public <T> T executeTask(Task<T> t) {
+ import java.rmi.registry.LocateRegistry;
+ import java.rmi.registry.Registry;
+ import java.rmi.server.UnicastRemoteObject;
+ import compute.Compute;
+ import compute.Task;
+ 
+ public class ComputeEngine implements Compute {
+ 
+     public ComputeEngine() {
+         super();
+     }
+ 
+     public <T> T executeTask(Task<T> t) {
+        System.out.println("\nRecebida solicitacao do servidor, para executar um servico do objeto: " + t);
         return t.execute();
-    }
-
-    public static void main(String[] args) {
-
-        try {
-            String name = "Compute";
-            Compute engine = new ComputeEngine();
-            Compute stub =
-                (Compute) UnicastRemoteObject.exportObject(engine, 0);
-            Registry registry = LocateRegistry.getRegistry(args[0],Integer.parseInt(args[1]));
-            registry.rebind(name, stub);
-            System.out.println("ComputeEngine bound");
-        } catch (Exception e) {
-            System.err.println("ComputeEngine exception:");
-            e.printStackTrace();
-        }
-    }
-}
+     }
+ 
+     
+     public static void main(String[] args) {
+         try {
+             String name = "Compute";
+             Compute engine = new ComputeEngine();
+             Compute stub =
+                 (Compute) UnicastRemoteObject.exportObject(engine, 0);
+             Registry registry = LocateRegistry.getRegistry(args[0],Integer.parseInt(args[1]));
+             registry.rebind(name, stub);
+             System.out.println("ComputeEngine bound");
+         } catch (Exception e) {
+             System.err.println("ComputeEngine exception:");
+             e.printStackTrace();
+         }
+     }
+ }
+ 
