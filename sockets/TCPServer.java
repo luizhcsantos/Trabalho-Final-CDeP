@@ -79,6 +79,7 @@ class Connection extends Thread {
                 String data = (String) in.readObject(); 
                 System.out.println("\nData: " + data + "\n");
                 String[] dadosSeparados = data.split(" "); 
+                System.out.println(dadosSeparados[0]);
 
                 if (dadosSeparados[0].toLowerCase().equals("encript")) {
                     String stringOriginal = dadosSeparados[1]; 
@@ -99,6 +100,18 @@ class Connection extends Thread {
 
                     System.out.println("\nResposta do servico Encript recebida, enviando ao cliente...");
                     out.writeObject(senhaGerada);
+                    out.flush();
+                }
+
+                else if (dadosSeparados[0].toLowerCase().equals("imc")) {
+                    float altura = Float.parseFloat(dadosSeparados[1]); 
+                    float peso = Float.parseFloat(dadosSeparados[2]);  
+                    IMC task = new IMC(altura, peso); 
+                    float imc = task.execute(); 
+
+                    System.out.println("\nResposta do servico IMC recebida, enviando ao cliente...");
+                    System.out.println("\nimc: "+imc);
+                    out.writeObject(imc);
                     out.flush();
                 }
 

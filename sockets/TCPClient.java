@@ -50,7 +50,7 @@ public class TCPClient {
                     System.out.println("A string encriptada: " + encryptedString + "\n");
            } else if (args[0].toLowerCase().equals("senha")) {
 
-                 int comprimento = Integer.parseInt(args[1]);
+                int comprimento = Integer.parseInt(args[1]);
 
                 if (comprimento <= 0) {
                     System.out.println("Comprimento deve ser de, no minimo, 8 caracteres");
@@ -67,6 +67,20 @@ public class TCPClient {
                 System.out.println("\nResposta recebida do servidor do servico Senha:");
                 System.out.println("A senha gerada: " + senhaGerada + "\n");
 
+           }
+           else if (args[0].toLowerCase().equals("imc")) {
+            float altura = Float.parseFloat(args[1]); 
+            float peso = Float.parseFloat(args[2]); 
+
+            // Envia a solicitação ao servidor
+            out.writeObject("imc " + altura + " " + peso);
+
+            // Recebe o resultado do IMC do servidor
+            float imc = (Float) in.readObject();
+
+            // Exibe o resultado do IMC
+            System.out.println("\nResposta recebida do servidor para o servico IMC:");
+            System.out.println("Seu IMC eh: " + imc + "\n");
            }
             
         }catch (UnknownHostException e) {
