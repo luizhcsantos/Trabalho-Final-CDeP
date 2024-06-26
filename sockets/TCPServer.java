@@ -8,7 +8,7 @@ import java.net.Socket;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import client.Encript;
+import client.*;
 import compute.Compute;
 
 public class TCPServer {
@@ -60,12 +60,12 @@ class Connection extends Thread {
                 
                 System.out.println("\nConexao CLIENTE-SERVIDOR estabelecida com sucesso...\n");
                 this.start();
-                
+
             } catch (IOException e) {
                 System.out.println("Connection:" + e.getMessage());
             }
             catch(Exception e) {
-                System.err.println("\nErro ao executar a conexão servidor-executor:");
+                System.err.println("\nErro ao executar a conexao SERVIDOR-EXECUTOR:");
                 e.printStackTrace();
             }
             
@@ -86,15 +86,25 @@ class Connection extends Thread {
                     Encript task = new Encript(stringOriginal, deslocamento); 
                     String stringEncriptada = task.execute(); 
 
-                    System.out.println("\nResposta do serviço Encript recebida, enviando ao cliente...");
+                    System.out.println("\nResposta do servico Encript recebida, enviando ao cliente...");
                     // Sends the encrypted string back to the client
                     out.writeObject(stringEncriptada);
+                    out.flush();
+                } 
+                else if (dadosSeparados[0].toLowerCase().equals("senha")) {
+                    System.out.println("teste");
+                    int comprimento = Integer.parseInt(dadosSeparados[1]);
+                    Senha task = new Senha(comprimento); 
+                    String senhaGerada = task.execute(); 
+
+                    System.out.println("\nResposta do servico Encript recebida, enviando ao cliente...");
+                    out.writeObject(senhaGerada);
                     out.flush();
                 }
 
             }catch (Exception e) {
                 System.err.println(
-                    "\nErro ao executar serviços do servidor - verifique se as entradas do cliente foram corretas. Para ajuda, utilize 'help': \n");
+                    "\nErro ao executar servicos do servidor - verifique se as entradas do cliente foram corretas.: \n");
             e.printStackTrace();
         }
 

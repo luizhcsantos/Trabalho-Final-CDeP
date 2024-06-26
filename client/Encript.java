@@ -1,6 +1,5 @@
 package client;
 
-import java.io.CharArrayReader;
 import java.io.Serializable;
 
 import compute.Task;
@@ -45,7 +44,7 @@ public class Encript implements Task<String>, Serializable {
                 stringEncriptada.append(caracter); 
             }
         }
-        System.out.println("\nEnviando resposta da solicitação ao servidor... ");
+        System.out.println("\nEnviando resposta da solicitacao ao servidor... ");
         return stringEncriptada.toString();
 
     }

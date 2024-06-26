@@ -46,8 +46,27 @@ public class TCPClient {
                     String encryptedString = (String) in.readObject();
 
                     // Print the encrypted string
-                    System.out.println("\nResposta recebida do servidor do servco Encript:");
+                    System.out.println("\nResposta recebida do servidor do servico Encript:");
                     System.out.println("A string encriptada: " + encryptedString + "\n");
+           } else if (args[0].toLowerCase().equals("senha")) {
+
+                 int comprimento = Integer.parseInt(args[1]);
+
+                if (comprimento <= 0) {
+                    System.out.println("Comprimento deve ser de, no minimo, 8 caracteres");
+                    return;
+                }
+
+                // Envia a solicitação de geração de senha para o servidor
+                out.writeObject("senha " + comprimento);
+
+                // Recebe a senha gerada do servidor
+                String senhaGerada = (String) in.readObject();
+
+                // Imprime a senha gerada
+                System.out.println("\nResposta recebida do servidor do servico Senha:");
+                System.out.println("A senha gerada: " + senhaGerada + "\n");
+
            }
             
         }catch (UnknownHostException e) {
