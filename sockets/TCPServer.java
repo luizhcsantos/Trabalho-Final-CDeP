@@ -114,6 +114,17 @@ class Connection extends Thread {
                     out.writeObject(imc);
                     out.flush();
                 }
+                // else if (dadosSeparados[0].toLowerCase().equals("qrcode")) {
+                //     String texto = dadosSeparados[1];
+                //     int largura = Integer.parseInt(dadosSeparados[2]);
+                //     int altura = Integer.parseInt(dadosSeparados[3]);
+                //     QRCodeGenerator task = new QRCodeGenerator(texto, largura, altura);
+                //     String caminhoArquivo = task.execute();
+
+                //     System.out.println("\nResposta do servico QRCode recebida, enviando ao cliente...");
+                //     out.writeObject(caminhoArquivo);
+                //     out.flush();
+                // }
 
             }catch (Exception e) {
                 System.err.println(

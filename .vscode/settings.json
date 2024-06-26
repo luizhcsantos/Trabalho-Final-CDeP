@@ -1,0 +1,9 @@
+{
+    "java.project.sourcePaths": [
+        "."
+    ],
+    "java.project.referencedLibraries": [
+        "libs\\core-3.4.1.jar",
+        "libs\\javase-3.4.1.jar"
+    ]
+}

@@ -10,10 +10,17 @@ call javac -cp ./classes/compute.jar client/Encript.java
 pause
 call javac -cp ./classes/compute.jar client/Senha.java
 pause
-call javac -cp ./classes/compute.jar sockets/TCPServer.java client/Encript.java client/Senha.java client/IMC.java
-pause 
-call javac -cp ./classes/compute.jar sockets/TCPClient.java client/Encript.java
+call javac -cp ./classes/compute.jar client/IMC.java
+pause
 
+call javac -cp ./classes/compute.jar;libs/core-3.4.1.jar;libs/javase-3.4.1.jar sockets/TCPServer.java client/Encript.java client/Senha.java client/IMC.java
+pause 
+
+call javac -cp ./classes/compute.jar sockets/TCPClient.java client/Encript.java
 pause 
 call javac -cp ./classes/compute.jar sockets/TCPClient.java client/Senha.java
 pause 
+call javac -cp ./classes/compute.jar sockets/TCPClient.java client/IMC.java
+pause 
+
+
