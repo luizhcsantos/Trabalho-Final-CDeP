@@ -3,6 +3,7 @@ package sockets;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -13,9 +14,24 @@ import compute.Compute;
 public class TCPServer {
 
     public static void main(String args[]) {
+
+        try {
+            // Conectar com o cliente
+            int serverPort = 7896;
+            ServerSocket listenSocket = new ServerSocket(serverPort);
+            while (true) {
+                Socket clientSocket = listenSocket.accept();
+                Connection c = new Connection(clientSocket);
+            }
+        } catch (IOException e) {
+            System.out.println("Listen socket:" + e.getMessage());
+        }
+
+    } 
+}
         
 
-    class Connection extends Thread {
+class Connection extends Thread {
         
         // Variáveis da conexão cliente - servidor
         ObjectInputStream in;
@@ -35,15 +51,16 @@ public class TCPServer {
                 registry = LocateRegistry.getRegistry("localhost", 1099);
                 comp = (Compute) registry.lookup(name);
 
-                System.out.println("\nConexão SERVIDOR-EXECUTOR estabelecida com sucesso...\n");
+                System.out.println("\nConexao SERVIDOR-EXECUTOR estabelecida com sucesso...\n");
 
                 clientSocket = aClientSocket; 
                 in = new ObjectInputStream(clientSocket.getInputStream()); 
                 out = new ObjectOutputStream(clientSocket.getOutputStream()); 
                 out.flush();
                 
-                System.out.println("\nConexão CLIENTE-SERVIDOR estabelecida com sucesso...\n");
-        
+                System.out.println("\nConexao CLIENTE-SERVIDOR estabelecida com sucesso...\n");
+                this.start();
+                
             } catch (IOException e) {
                 System.out.println("Connection:" + e.getMessage());
             }
@@ -54,7 +71,7 @@ public class TCPServer {
             
         }
 
-        @Override
+        
         public void run() {
             try {
                 System.out.println("\nIniciando leitura dos dados enviados pelo Cliente\n");
@@ -69,7 +86,7 @@ public class TCPServer {
                     Encript task = new Encript(stringOriginal, deslocamento); 
                     String stringEncriptada = task.execute(); 
 
-                    System.out.println("\nResposta do serviço Encrypt recebida, enviando ao cliente...");
+                    System.out.println("\nResposta do serviço Encript recebida, enviando ao cliente...");
                     // Sends the encrypted string back to the client
                     out.writeObject(stringEncriptada);
                     out.flush();
@@ -81,8 +98,5 @@ public class TCPServer {
             e.printStackTrace();
         }
 
-    }
-
-    }
     }
 }
