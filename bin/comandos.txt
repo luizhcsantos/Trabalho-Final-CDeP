@@ -1,0 +1,28 @@
+javac compute\Compute.java compute\Task.java
+jar cvf classes\compute.jar compute\*.class
+javac -cp .\classes\compute.jar engine\ComputeEngine.java
+
+
+--SERVIÇOS-- 
+javac -cp .\classes\compute.jar client\Encript.java
+
+
+--SERVER--
+javac -cp .\classes\compute.jar sockets\TCPServer.java client\Encript.java
+
+--CLIENT--
+javac -cp .\classes\compute.jar sockets\TCPClient.java client\Encript.java
+
+
+--COMPUTE ENGINE-- 
+
+java -cp engine.ComputeEngine 1099
+
+
+java -cp '/Users/lhsan/OneDrive - Unesp/2024/1 Semestre/CDeP/Trabalho Final' sockets.TCPClient encript CiênciaDaComputação 5
+
+java -cp '/Users/lhsan/OneDrive - Unesp/2024/1 Semestre/CDeP/Trabalho Final' sockets.TCPClient senha 10 
+
+java -cp '/Users/lhsan/OneDrive - Unesp/2024/1 Semestre/CDeP/Trabalho Final' sockets.TCPClient IMC 1.63 75
+
+java -cp '/Users/lhsan/OneDrive - Unesp/2024/1 Semestre/CDeP/Trabalho Final' sockets.TCPClient QRCODE 'fct.unesp.br' 150 150 
