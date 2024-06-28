@@ -1,18 +1,31 @@
 package sockets;
 
+import client.Encript;
+import client.IMC;
+import client.QRCodeGenerator;
+import client.Senha;
+import compute.Compute;
+import java.io.File;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.rmi.NotBoundException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-import client.*;
-import compute.Compute;
-
 public class TCPServer {
 
+
+    static final String CAMINHO_PADRAO_QR = "services/qrcodes/";
+
+    static {
+        File diretorio = new File(CAMINHO_PADRAO_QR);
+        if (!diretorio.exists()) {
+            diretorio.mkdirs();
+        }
+    }
     public static void main(String args[]) {
 
         try {
@@ -64,14 +77,14 @@ class Connection extends Thread {
             } catch (IOException e) {
                 System.out.println("Connection:" + e.getMessage());
             }
-            catch(Exception e) {
+            catch(NotBoundException e) {
                 System.err.println("\nErro ao executar a conexao SERVIDOR-EXECUTOR:");
-                e.printStackTrace();
             }
             
         }
 
         
+        @Override
         public void run() {
             try {
                 System.out.println("\nIniciando leitura dos dados enviados pelo Cliente\n");
@@ -81,55 +94,54 @@ class Connection extends Thread {
                 String[] dadosSeparados = data.split(" "); 
                 System.out.println(dadosSeparados[0]);
 
-                if (dadosSeparados[0].toLowerCase().equals("encript")) {
-                    String stringOriginal = dadosSeparados[1]; 
-                    int deslocamento = Integer.parseInt(dadosSeparados[2]); 
-                    Encript task = new Encript(stringOriginal, deslocamento); 
-                    String stringEncriptada = task.execute(); 
-
-                    System.out.println("\nResposta do servico Encript recebida, enviando ao cliente...");
-                    // Sends the encrypted string back to the client
-                    out.writeObject(stringEncriptada);
-                    out.flush();
-                } 
-                else if (dadosSeparados[0].toLowerCase().equals("senha")) {
-                    System.out.println("teste");
-                    int comprimento = Integer.parseInt(dadosSeparados[1]);
-                    Senha task = new Senha(comprimento); 
-                    String senhaGerada = task.execute(); 
-
-                    System.out.println("\nResposta do servico Encript recebida, enviando ao cliente...");
-                    out.writeObject(senhaGerada);
-                    out.flush();
+                switch (dadosSeparados[0].toLowerCase()) {
+                    case "encript" ->                         {
+                            String stringOriginal = dadosSeparados[1];
+                            int deslocamento = Integer.parseInt(dadosSeparados[2]);
+                            Encript task = new Encript(stringOriginal, deslocamento);
+                            String stringEncriptada = task.execute();
+                            System.out.println("\nResposta do servico Encript recebida, enviando ao cliente...");
+                            // Sends the encrypted string back to the client
+                            out.writeObject(stringEncriptada);
+                            out.flush();
+                        }
+                    case "senha" ->                         {
+                            System.out.println("teste");
+                            int comprimento = Integer.parseInt(dadosSeparados[1]);
+                            Senha task = new Senha(comprimento);
+                            String senhaGerada = task.execute();
+                            System.out.println("\nResposta do servico Encript recebida, enviando ao cliente...");
+                            out.writeObject(senhaGerada);
+                            out.flush();
+                        }
+                    case "imc" ->                         {
+                            float altura = Float.parseFloat(dadosSeparados[1]);
+                            float peso = Float.parseFloat(dadosSeparados[2]);
+                            IMC task = new IMC(altura, peso);
+                            float imc = task.execute();
+                            System.out.println("\nResposta do servico IMC recebida, enviando ao cliente...");
+                            System.out.println("\nimc: "+imc);
+                            out.writeObject(imc);
+                            out.flush();
+                        }
+                    case "qrcode" ->                         {
+                            String texto = dadosSeparados[1];
+                            int largura = Integer.parseInt(dadosSeparados[2]);
+                            int altura = Integer.parseInt(dadosSeparados[3]);
+                            String caminho =  TCPServer.CAMINHO_PADRAO_QR + "qrcode_" + System.currentTimeMillis() + ".png";
+                            QRCodeGenerator task = new QRCodeGenerator(texto, largura, altura, caminho);
+                            String caminhoGerado = task.execute();
+                            System.out.println("\nQR Code gerado, caminho: " + caminhoGerado);
+                            out.writeObject(caminhoGerado);
+                            out.flush();
+                        }
+                    default -> {
+                    }
                 }
 
-                else if (dadosSeparados[0].toLowerCase().equals("imc")) {
-                    float altura = Float.parseFloat(dadosSeparados[1]); 
-                    float peso = Float.parseFloat(dadosSeparados[2]);  
-                    IMC task = new IMC(altura, peso); 
-                    float imc = task.execute(); 
-
-                    System.out.println("\nResposta do servico IMC recebida, enviando ao cliente...");
-                    System.out.println("\nimc: "+imc);
-                    out.writeObject(imc);
-                    out.flush();
-                }
-                // else if (dadosSeparados[0].toLowerCase().equals("qrcode")) {
-                //     String texto = dadosSeparados[1];
-                //     int largura = Integer.parseInt(dadosSeparados[2]);
-                //     int altura = Integer.parseInt(dadosSeparados[3]);
-                //     QRCodeGenerator task = new QRCodeGenerator(texto, largura, altura);
-                //     String caminhoArquivo = task.execute();
-
-                //     System.out.println("\nResposta do servico QRCode recebida, enviando ao cliente...");
-                //     out.writeObject(caminhoArquivo);
-                //     out.flush();
-                // }
-
-            }catch (Exception e) {
+            }catch (IOException | ClassNotFoundException | NumberFormatException e) {
                 System.err.println(
                     "\nErro ao executar servicos do servidor - verifique se as entradas do cliente foram corretas.: \n");
-            e.printStackTrace();
         }
 
     }

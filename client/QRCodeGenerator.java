@@ -1,17 +1,18 @@
 package client;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
-
-import javax.imageio.ImageIO;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.EncodeHintType;
 import com.google.zxing.WriterException;
-import com.google.zxing.qrcode.QRCodeWriter;
-import com.google.zxing.common.BitMatrix;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 
 import compute.Task;
 
@@ -21,29 +22,36 @@ public class QRCodeGenerator implements Task<String>, Serializable {
     private String texto;
     private int largura;
     private int altura;
+    private String caminho;  
 
-    public QRCodeGenerator(String texto, int largura, int altura) {
+   
+    
+
+    public QRCodeGenerator(String texto, int largura, int altura, String caminho) {
         this.texto = texto;
         this.largura = largura;
         this.altura = altura;
+        this.caminho = caminho; 
     }
 
     @Override
     public String execute() {
-        return gerarQRCode(texto, largura, altura);
+        return gerarQRCode(texto, largura, altura, caminho);
     }
 
-    private String gerarQRCode(String texto, int largura, int altura) {
-        QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix;
+    private String gerarQRCode(String texto, int largura, int altura, String caminho) {
+        
         try {
-            bitMatrix = qrCodeWriter.encode(texto, BarcodeFormat.QR_CODE, largura, altura);
-            String nomeArquivo = "QRCode.png";
-            File outputFile = new File(nomeArquivo);
-            MatrixToImageWriter.writeToPath(bitMatrix, "PNG", outputFile.toPath());
-            return outputFile.getAbsolutePath();
+             Map<EncodeHintType, Object> hints = new HashMap<>();
+            hints.put(EncodeHintType.CHARACTER_SET, "UTF-8");
+
+            QRCodeWriter qrCodeWriter = new QRCodeWriter();
+            BitMatrix bitMatrix = qrCodeWriter.encode(texto, BarcodeFormat.QR_CODE, largura, altura, hints);
+            Path path = Paths.get(caminho);
+            MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
+
+            return path.toAbsolutePath().toString();
         } catch (WriterException | IOException e) {
-            e.printStackTrace();
             return null;
         }
     }

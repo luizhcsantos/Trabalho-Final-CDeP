@@ -48,7 +48,8 @@ public class TCPClient {
                     // Print the encrypted string
                     System.out.println("\nResposta recebida do servidor do servico Encript:");
                     System.out.println("A string encriptada: " + encryptedString + "\n");
-           } else if (args[0].toLowerCase().equals("senha")) {
+           } 
+           else if (args[0].toLowerCase().equals("senha")) {
 
                 int comprimento = Integer.parseInt(args[1]);
 
@@ -82,21 +83,23 @@ public class TCPClient {
             System.out.println("\nResposta recebida do servidor para o servico IMC:");
             System.out.println("Seu IMC eh: " + imc + "\n");
            }
-        //    else if (args[0].toLowerCase().equals("qrcode")) {
-        //     String texto = args[1];
-        //     int largura = Integer.parseInt(args[2]);
-        //     int altura = Integer.parseInt(args[3]);
+           else if (args[0].toLowerCase().equals("qrcode")) {
+            String texto = args[1];
+            int largura = Integer.parseInt(args[2]);
+            int altura = Integer.parseInt(args[3]);
+
+            String data = String.join(" ", "qrcode", texto, String.valueOf(largura), String.valueOf(altura));
         
-        //     // Envia a solicitação ao servidor
-        //     out.writeObject("qrcode " + texto + " " + largura + " " + altura);
+            // Envia a solicitação ao servidor
+            out.writeObject(data);
         
-        //     // Recebe o caminho do arquivo gerado do servidor
-        //     String caminhoArquivo = (String) in.readObject();
+            // Recebe o caminho do arquivo gerado do servidor
+            String caminhoGerado = (String) in.readObject();
         
-        //     // Exibe o resultado
-        //     System.out.println("\nResposta recebida do servidor para o servico de Geracaoo de QR Code:");
-        //     System.out.println("QR Code gerado em: " + caminhoArquivo + "\n");
-        // }
+            // Exibe o resultado
+            System.out.println("\nResposta recebida do servidor para o servico de Geracaoo de QR Code:");
+            System.out.println("QR Code gerado em: " + caminhoGerado + "\n");
+        }
             
         }catch (UnknownHostException e) {
             System.out.println("Socket: " + e.getMessage());

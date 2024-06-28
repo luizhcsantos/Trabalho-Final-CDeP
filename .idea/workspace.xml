@@ -5,18 +5,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c93d3fde-1f9b-49c9-b426-4a734bbc4e90" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Trabalho Final.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Trabalho Final.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/compute.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/compute.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/Encript.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/Encript.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/Encript.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/Encript.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.bat" beforeDir="false" afterPath="$PROJECT_DIR$/setup.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/IMC.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/IMC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/QRCodeGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/QRCodeGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/QRCodeGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/client/QRCodeGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/Senha.class" beforeDir="false" afterPath="$PROJECT_DIR$/client/Senha.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compute/Compute.class" beforeDir="false" afterPath="$PROJECT_DIR$/compute/Compute.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/compute/Task.class" beforeDir="false" afterPath="$PROJECT_DIR$/compute/Task.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/ComputeEngine.class" beforeDir="false" afterPath="$PROJECT_DIR$/engine/ComputeEngine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sockets/Connection.class" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/Connection.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sockets/TCPClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/TCPClient.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sockets/TCPClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/TCPClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sockets/TCPServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/TCPServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sockets/TCPServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/TCPServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -26,19 +41,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/lhsan/OneDrive - Unesp/2024/1 Semestre/CDeP/Trabalho Final/libs/javase-3.5.3.jar",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -57,6 +77,8 @@
       <updated>1719410741401</updated>
       <workItem from="1719410743431" duration="2648000" />
       <workItem from="1719426397181" duration="3000" />
+      <workItem from="1719591989416" duration="253000" />
+      <workItem from="1719592345076" duration="245000" />
     </task>
     <servers />
   </component>
